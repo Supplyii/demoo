@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto Claim Nano</title>
+  <script>
+    function autoClaimNano() {
+      const websiteURL = 'https://freenanofaucet.com/'; // Replace with the target website URL
+      const walletAddress = 'nano_3a3a6cq3xra4mtu1ifgxgc4z364f657gj776a9ruwcuiggkaf78tcopqqmz7'; // Replace with your wallet address
+
+      // Visit the website
+      fetch(websiteURL)
+        .then(response => response.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+
+          // Find the input field for the wallet address and fill it
+          const addressInput = doc.querySelector('#wallet-address-input'); // Replace with the actual selector for the input field
+          addressInput.value = walletAddress;
+
+          // Find and click the "Get Nano!" button
+          const claimButton = doc.querySelector('button:contains("Get Nano!")'); // Replace with the appropriate selector for the button
+          claimButton.click();
+
+          // Wait for a few seconds before further actions
+          setTimeout(() => {
+            // Perform any other desired actions after clicking the button
+            console.log('Auto claiming Nano completed successfully.');
+          }, 3000);
+        })
+        .catch(error => {
+          console.error('An error occurred:', error);
+        });
+    }
+  </script>
+</head>
+<body>
+  <h1>Auto Claim Nano</h1>
+  <button onclick="autoClaimNano()">Start Auto Claim</button>
+</body>
+</html>
